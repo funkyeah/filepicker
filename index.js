@@ -16,31 +16,28 @@ function Filepicker(apiKey) {
 // Get metadata of filepicker file
 // options from https://www.filepicker.com/documentation/file_ingestion/rest_api/metadata
 Filepicker.prototype.stat = function(url, options, callback) {
- 
-  var req, req_options;
-  
-  callback = callback || function(){};
-  if(!options) {
-    options = {};
-  }
-  if(!url) {
-    callback(new Error('Error: no url given'));
-    return;	
-  }
-  request({
-    method: 'GET',
+	callback = callback || function(){};
+  	if(!options) {
+    	options = {};
+  	}
+	if(!url) {
+    	callback(new Error('Error: no url given'));
+    	return;	
+  	}
+    request({
+    	method: 'GET',
 		url: url
 		form: {
-		  size: options.size || true
-		  mimetype: options.mimetype || true
-		  filename: options.filename || true
-		  width: options.width || true
-		  height: options.height || true
-		  writeable: options.writeable || true
-		  md5: options.md5 || true
-		  path: options.path || true
-		  container: options.container || true
-		  security: options.security || {}
+			size: options.size || true
+			mimetype: options.mimetype || true
+			filename: options.filename || true
+			width: options.width || true
+			height: options.height || true
+			writeable: options.writeable || true
+			md5: options.md5 || true
+			path: options.path || true
+			container: options.container || true
+			security: options.security || {}
 		}
 	}, function(err, res, body) {
 		if(err) {
@@ -54,7 +51,6 @@ Filepicker.prototype.stat = function(url, options, callback) {
 			callback(new Error('Unknown response'), null, body);
 			return;
 		}
-
 		if(returnJson.result == 'ok') {
 			returnData = returnJson.data;
 			callback(null, returnData.url, returnData.data);
