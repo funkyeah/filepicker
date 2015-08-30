@@ -8,24 +8,24 @@ var endpoints = {};
 endpoints.tempStorage = BASE_URL+"/api/path/storage/";
 
 function Filepicker(apiKey) {
-	this.apiKey = apiKey;
-	return this;
+    this.apiKey = apiKey;
+    return this;
 }
 
 // ## Filepicker#stat
 // Get metadata of filepicker file
 // options from https://www.filepicker.com/documentation/file_ingestion/rest_api/metadata
 Filepicker.prototype.stat = function(url, options, callback) {
-	callback = callback || function(){};
-  	if(!options) {
-    	options = {};
-  	}
-	if(!url) {
-    	callback(new Error('Error: no url given'));
-    	return;	
+    callback = callback || function(){};
+    if(!options) {
+        options = {};
+    }
+    if(!url) {
+        callback(new Error('Error: no url given'));
+        return;	
   	}
     request({
-    	method: 'GET',
+        method: 'GET',
 		url: url
 		form: {
 			size: options.size || true
