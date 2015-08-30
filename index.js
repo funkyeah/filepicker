@@ -12,6 +12,61 @@ function Filepicker(apiKey) {
 	return this;
 }
 
+// ## Filepicker#stat
+// Get metadata of filepicker file
+// options from https://www.filepicker.com/documentation/file_ingestion/rest_api/metadata
+Filepicker.prototype.stat = function(url, options, callback) {
+ 
+  var req, req_options;
+  
+  callback = callback || function(){};
+  if(!options) {
+    options = {};
+  }
+  if(!url) {
+    callback(new Error('Error: no url given'));
+    return;	
+  }
+  request({
+    method: 'GET',
+		url: url
+		form: {
+		  size: options.size || true
+		  mimetype: options.mimetype || true
+		  filename: options.filename || true
+		  width: options.width || true
+		  height: options.height || true
+		  writeable: options.writeable || true
+		  md5: options.md5 || true
+		  path: options.path || true
+		  container: options.container || true
+		  security: options.security || {}
+		}
+	}, function(err, res, body) {
+		if(err) {
+			callback(err);
+			return;
+		}
+		var returnJson;
+		try {
+			returnJson = JSON.parse(body);
+		} catch(e) {
+			callback(new Error('Unknown response'), null, body);
+			return;
+		}
+
+		if(returnJson.result == 'ok') {
+			returnData = returnJson.data;
+			callback(null, returnData.url, returnData.data);
+		} else if(returnJson.result == 'error') {
+			callback(new Error(returnJson.msg));
+		} else {
+			callback(new Error('Unknown response'), null, returnJson);
+		}
+	});
+};
+
+
 // ## Filepicker#getUrlFromData
 // Store data in filepicker.
 
