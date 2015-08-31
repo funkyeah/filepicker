@@ -43,6 +43,9 @@ Filepicker.prototype.stat = function(url, options, callback) {
             security: options.security || {}
         }
     }, function(err, res, body) {
+        console.log('err = '+err);
+        console.log('res = '+res);
+        console.log('body = '+body);
         if(err) {
             callback(err);
             return;
