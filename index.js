@@ -59,14 +59,7 @@ Filepicker.prototype.stat = function(url, options, callback) {
                 return;
              }
         }
-        if(returnJson.result == 'ok') {
-            returnData = returnJson.data;
-            callback(null, returnData.url, returnData.data);
-        } else if(returnJson.result == 'error') {
-            callback(new Error(returnJson.msg));
-        } else {
-            callback(new Error('Unknown response'), null, returnJson);
-        }
+        return returnJson;
     });
 };
 
