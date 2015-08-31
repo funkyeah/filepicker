@@ -31,15 +31,15 @@ Filepicker.prototype.stat = function(url, options, callback) {
         method: 'GET',
         url: url,
         form: {
-            size: options.size || true
-            mimetype: options.mimetype || true
-            filename: options.filename || true
-            width: options.width || true
-            height: options.height || true
-            writeable: options.writeable || true
-            md5: options.md5 || true
-            path: options.path || true
-            container: options.container || true
+            size: options.size || true,
+            mimetype: options.mimetype || true,
+            filename: options.filename || true,
+            width: options.width || true,
+            height: options.height || true,
+            writeable: options.writeable || true,
+            md5: options.md5 || true,
+            path: options.path || true,
+            container: options.container || true,
             security: options.security || {}
         }
     }, function(err, res, body) {
