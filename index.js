@@ -59,6 +59,7 @@ Filepicker.prototype.stat = function(url, options, callback) {
                 return;
              }
         }
+        callback(returnJson);
         return returnJson;
     });
 };
