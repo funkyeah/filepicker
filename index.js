@@ -51,11 +51,13 @@ Filepicker.prototype.stat = function(url, options, callback) {
             return;
         }
         var returnJson;
-        try {
-            returnJson = JSON.parse(body);
-        } catch(e) {
-            callback(new Error('Unknown response'), null, body);
-            return;
+        if(typeof(body)==='string'){
+            try {
+                returnJson = JSON.parse(body);
+             } catch(e) {
+                callback(new Error('Unknown response'), null, body);
+                return;
+             }
         }
         if(returnJson.result == 'ok') {
             returnData = returnJson.data;
