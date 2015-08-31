@@ -59,8 +59,10 @@ Filepicker.prototype.stat = function(url, options, callback) {
                 return;
              }
         } else {
+            console.log('returnJSON);
             returnJson = body;
         }
+        console.log('callbacked);
         callback(returnJson);
         return returnJson;
     });
