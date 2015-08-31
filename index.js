@@ -29,7 +29,7 @@ Filepicker.prototype.stat = function(url, options, callback) {
     }
     request({
         method: 'GET',
-        url: 'url+/metadata?',
+        url: url+'/metadata?',
         form: {
             size: options.size || true,
             mimetype: options.mimetype || true,
