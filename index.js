@@ -58,6 +58,8 @@ Filepicker.prototype.stat = function(url, options, callback) {
                 callback(new Error('Unknown response'), null, body);
                 return;
              }
+        } else {
+            returnJson = body;
         }
         callback(returnJson);
         return returnJson;
