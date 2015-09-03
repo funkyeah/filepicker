@@ -19,14 +19,18 @@ function Filepicker(apiKey) {
 // Get metadata of filepicker file
 // options from https://www.filepicker.com/documentation/file_ingestion/rest_api/metadata
 Filepicker.prototype.stat = function(url, options, callback) {
-    callback = callback || function(){};
-    if(!options) {
-        options = {};
-    }
     if(!url) {
         callback(new Error('Error: no url given'));
         return; 
     }
+    if(!options) {
+        options = {};
+    }
+    if(typeof options === 'function') {
+        callback = options;
+        options = {};
+    }
+    callback = callback || function(){};
     request({
         method: 'GET',
         url: url+'/metadata?',
@@ -39,8 +43,7 @@ Filepicker.prototype.stat = function(url, options, callback) {
             writeable: options.writeable || true,
             md5: options.md5 || true,
             path: options.path || true,
-            container: options.container || true,
-            security: options.security || {}
+            container: options.container || true
         }
     }, function(err, res, body) {
         console.log('err = '+err);
