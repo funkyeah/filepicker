@@ -49,13 +49,31 @@ var filepicker = new Filepicker('YOUR_API_KEY');
 	filepicker.getUrlFromUrl('http://example.com/mypic.jpg', {persist:true}, function(err, url) {
 		console.log("the picture at http://example.com/mypic.jpg is now stored at "+url);
 	});
+	```
 
 3. `getUrlFromBuffer`
 	* Stores a Buffer on Filepicker
 
-	```javascript
+	``` javascript
 	fs.readFile('/myfile.txt', function(err, buf) {
 		filepicker.getUrlFromBuffer(buf, {persist:true}, function(err, url) {
 			console.log("myfile.txt is now stored at "+url);
 		});
 	})
+	```
+
+4. `stat`
+	* Stores a Buffer on Filepicker
+	* options specifies what is returned from the from filepicker [REST API](https://www.filepicker.com/documentation/file-ingestion/rest-api/metadata)
+
+	``` javascript
+	url = 'http://simpleicon.com/wp-content/uploads/antenna-2.png';
+	options = {
+		filename : false,
+		mimetype: true
+	};
+	filepicker.stat(url, options, function(err, url) {
+		console.log("antenna-2.png is now stored at "+url);
+	});
+	```
+	
